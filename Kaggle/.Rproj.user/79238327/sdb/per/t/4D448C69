@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "# Import the training set: train\ntrain_url <- \"http://s3.amazonaws.com/assets.datacamp.com/course/Kaggle/train.csv\"\ntrain <-  read.csv(train_url)\n\n# Import the testing set: test\ntest_url <- \"http://s3.amazonaws.com/assets.datacamp.com/course/Kaggle/test.csv\"\ntest <- read.csv(test_url)\n\n# Print train and test to the console\ntrain \ntest\n\n# Your train and test set are still loaded\nstr(train)\nstr(test)\n\n# Survival rates in absolute numbers\ntable(train$Survived)\n\n# Survival rates in proportions\nprop.table(table(train$Survived))\n\n# Two-way comparison: Sex and Survived\ntable(train$Sex, train$Survived)a\n\n# Two-way comparison: row-wise proportions\nprop.table(table(train$Sex, train$Survived),1)\n\n# Your train and test set are still loaded in\nstr(train)\nstr(test)\n\n# Create the column child, and indicate whether child or no child\ntrain$Child <- NA\ntrain$Child[train$Age < 18] <- 1\ntrain$Child[train$Age >= 18] <- 0\n\n# Two-way comparison\nprop.table(table(train$Child,train$Survived),1)\n\n# Your train and test set are still loaded in\nstr(train)\nstr(test)\n\n# Copy of test\ntest_one <- test\n\n# Initialize a Survived column to 0\ntest_one$Survived <- 0\n\n# Set Survived to 1 if Sex equals \"female\"\ntest_one$Survived[test_one$Sex==\"female\"] <- 1\n\n# Your train and test set are still loaded in\nstr(train)\nstr(test)\n\n# Build the decision tree\nmy_tree_two <- rpart(Survived ~ Pclass + Sex + Age + SibSp + Parch + Fare + Embarked, data = train, method = \"class\")\n\n# Visualize the decision tree using plot() and text()\nplot(my_tree_two)\ntext(my_tree_two)\n\n# Load in the packages to build a fancy plot\nlibrary(rattle)\nlibrary(rpart.plot)\nlibrary(RColorBrewer)\n\n# Time to plot your fancy tree\nfancyRpartPlot(my_tree_two)\n\n\n# Your train and test set are still loaded in\n\n# Change this command\nmy_tree_three <- rpart(Survived ~ Pclass + Sex + Age + SibSp + Parch + Fare + Embarked, \n                       data = train, method = \"class\", control = rpart.control(minsplit = 50, cp = 0))\n\n# Visualize my_tree_three\nfancyRpartPlot(my_tree_three)\n",
+    "created" : 1470203887802.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "456140946",
+    "id" : "4D448C69",
+    "lastKnownWriteTime" : 1470228193,
+    "last_content_update" : 1470228193804,
+    "path" : "~/R/Kaggle/titanic/datacamptutorial.R",
+    "project_path" : "titanic/datacamptutorial.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
